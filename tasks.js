@@ -40,13 +40,15 @@ function onDataReceived(text) {
   }
   else if(r === 'hello'){
     hello(text.replace("\n",""));
-  // }
-  // //help is used to display the possible entered text
-  // else if(text === 'help\n'){
-  //   console.log('These are the possible commands:\n quit or exit \n hello ');
-  // }
-  // else{
-  //   unknownCommand(text);
+  }
+  //help is used to display the possible entered text
+  else if(text === 'help\n'){
+    console.log('Available commands:');
+    console.log('hello [name] - Say hello to someone');
+    console.log('quit or exit - to quit the program');
+  }
+  else{
+    unknownCommand(text);
   }
 }
 
