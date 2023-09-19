@@ -31,24 +31,24 @@ function startApp(name){
  * This function  then directs to other functions
  * 
  * @param  {string} text data typed by the user
- * @returns {void}
+  * @returns {void}
  */
 function onDataReceived(text) {
+  const r=text.split(' ')[0];
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
-  else if(text === 'hello\n'){
-    hello();
-  }
-  //help is used to display the possible entered text
-  else if(text === 'help\n'){
-    console.log('These are the possible commands:\n quit or exit \n help ');
-  }
-  else{
-    unknownCommand(text);
+  else if(r === 'hello'){
+    hello(text.replace("\n",""));
+  // }
+  // //help is used to display the possible entered text
+  // else if(text === 'help\n'){
+  //   console.log('These are the possible commands:\n quit or exit \n hello ');
+  // }
+  // else{
+  //   unknownCommand(text);
   }
 }
-
 
 /**
  * prints "unknown command"
@@ -67,8 +67,8 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(text){
+  console.log(text +'!')
 }
 
 
