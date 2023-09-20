@@ -33,17 +33,38 @@ function startApp(name){
  * This function  then directs to other functions
  * 
  * @param  {string} text data typed by the user
-  * @returns {void}
+ * @returns {void}
  */
 function onDataReceived(text) {
   const r=text.split(' ')[0].trim();
+  const t=text.slice(4, text.length);
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
+  else if(r === 'add'){
+    if (t.trim() ===""){
+      console.log('task is empty');
+    }
+    else{
+      add(t);
+    }
+  } 
+  else if(r ==='remove'){
+    remove();
+    }
+  else if(r === 'remove1'){
+    remove1();
+  }
+  else if(r ==='remove2'){
+    remove2();
+  }
+  else if (text.trim() === 'list') {
+    listTasks();}
+
   else if(r === 'hello'){
     hello(text.replace("\n",""));
-  } else if (text.trim() === 'list') {
-    listTasks();}
+  }
+
   //help is used to display the possible entered text
   else if(text === 'help\n'){
     console.log('Available commands:');
@@ -98,5 +119,38 @@ function quit(){
     console.log(`${i+1}- ${Tasks[i]}`);
  }
  }
+ /**
+ * Add the tasks
+ *
+ * @returns {void}
+ */
+ function add(t) {
+     Tasks.push(t.replace('\n', ''));
+  }
+  /**
+ * remove the tasks
+ *
+ * @returns {void}
+ */
+ function remove() {
+  Tasks.pop();
+}
+ /**
+ * remove the tasks
+ *
+ * @returns {void}
+ */
+function remove1() { 
+  Tasks.shift(); 
+}
+  /**
+ * remove the tasks from the 
+ * 
+ * @returns {void}
+ */
+function remove2() { 
+  Tasks; 
+}
+ 
 // The following line starts the application
 startApp("Jana Sakr");
