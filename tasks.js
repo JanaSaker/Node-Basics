@@ -1,4 +1,6 @@
 
+const Tasks = ['HTML', 'CSS', 'ENGLISH'];
+
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -40,7 +42,8 @@ function onDataReceived(text) {
   }
   else if(r === 'hello'){
     hello(text.replace("\n",""));
-  }
+  } else if (text.trim() === 'list') {
+    listTasks();}
   //help is used to display the possible entered text
   else if(text === 'help\n'){
     console.log('Available commands:');
@@ -84,5 +87,16 @@ function quit(){
   process.exit();
 }
 
+/**
+ * Lists the tasks
+ *
+ * @returns {void}
+ */
+ function listTasks() {
+ console.log('Tasks:');
+ for (let i = 0; i < Tasks.length; i++) {
+    console.log(`${i+1}- ${Tasks[i]}`);
+ }
+ }
 // The following line starts the application
-startApp("Jana Sakr")
+startApp("Jana Sakr");
