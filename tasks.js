@@ -149,7 +149,7 @@ function remove1() {
  * @returns {void}
  */
 function remove2() { 
-  Tasks; 
+  Tasks.splice(1,1); 
 }
  
 // The following line starts the application
