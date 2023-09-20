@@ -1,5 +1,5 @@
 
-const Tasks = ['HTML', 'CSS', 'ENGLISH'];
+const Tasks = ['HTML', 'CSS', 'ENGLISH', 'JAVA'];
 
 /**
  * Starts the application
@@ -38,6 +38,7 @@ function startApp(name){
 function onDataReceived(text) {
   const r=text.split(' ')[0].trim();
   const t=text.slice(4, text.length);
+  const d=parseInt(text.slice(7,text.length))
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
@@ -49,14 +50,11 @@ function onDataReceived(text) {
       add(t);
     }
   } 
-  else if(r ==='remove'){
+  else if(text ==='remove\n'){
     remove();
     }
-  else if(r === 'remove1'){
-    remove1();
-  }
-  else if(r ==='remove2'){
-    remove2();
+  else if(r === 'remove'){
+    removeNo(d);
   }
   else if (text.trim() === 'list') {
     listTasks();}
@@ -70,6 +68,8 @@ function onDataReceived(text) {
     console.log('Available commands:');
     console.log('hello [name] - Say hello to someone');
     console.log('quit or exit - to quit the program');
+    console.log('add [task] - to add a task');
+    console.log('remove [number]- to remove a task');
   }
   else{
     unknownCommand(text);
@@ -135,22 +135,25 @@ function quit(){
  function remove() {
   Tasks.pop();
 }
- /**
- * remove the tasks
- *
- * @returns {void}
- */
-function remove1() { 
-  Tasks.shift(); 
+function removeNo(d) {
+  Tasks.splice(d-1,1);
 }
-  /**
- * remove the tasks from the 
- * 
- * @returns {void}
- */
-function remove2() { 
-  Tasks.splice(1,1); 
-}
+//  /**
+//  * remove the tasks
+//  *
+//  * @returns {void}
+//  */
+// function remove1() { 
+//   Tasks.shift(); 
+// }
+//   /**
+//  * remove the tasks from the 
+//  * 
+//  * @returns {void}
+//  */
+// function remove2() { 
+//   Tasks.splice(1,1); 
+// }
  
 // The following line starts the application
 startApp("Jana Sakr");
