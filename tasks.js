@@ -1,20 +1,16 @@
+let Tasks=[];
+const fs = require('fs');
 
-const Tasks = ['[ ] HTML', '[ ] CSS', '[ ] ENGLISH', '[ ] JAVA'];
+const saveFileName = process.argv[2] || 'DataBase.json'; // Use the provided filename or 'DataBase.json' by default
 
-const fs =require('fs');
+try {
+  const jsonString = fs.readFileSync(saveFileName, 'utf8');
+  Tasks = JSON.parse(jsonString);
+  console.log('Tasks loaded from disk:', Tasks);
+} catch (err) {
+  console.log('No previous data found or error reading file:', err);
+}
 
-fs.readFile("./DataBase.json", "utf8", (err, jsonString) => {
-  if (err) {
-    console.log("Error reading file from disk:", err);
-    return;
-  }
-  try {
-    const Tasks = JSON.parse(jsonString);
-    console.log("Tasks are:", Tasks); 
-  } catch (err) {
-    console.log("Error parsing JSON string:", err);
-  }
-});
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -156,19 +152,14 @@ function hello(text){
  *
  * @returns {void}
  */
-function quit(){
-  const jsonString = JSON.stringify(Tasks)
-  fs.writeFileSync('./DataBase.json', jsonString, err => {
-    if (err) {
-        console.log('Error writing file', err)
-    } else {
-        console.log('Successfully wrote file')
-    }
-})
-
-  console.log('Quitting now, goodbye!')
-  process.exit();
-}
+  function quit() {
+    const jsonString = JSON.stringify(Tasks);
+    fs.writeFileSync(saveFileName, jsonString); 
+    console.log('Quitting now, goodbye!');
+    process.exit();
+  
+  }
+  
 
 /**
  * Lists the tasks
