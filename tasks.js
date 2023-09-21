@@ -3,14 +3,14 @@ const Tasks = ['[ ] HTML', '[ ] CSS', '[ ] ENGLISH', '[ ] JAVA'];
 
 const fs =require('fs');
 
-fs.readFile("./customer.json", "utf8", (err, jsonString) => {
+fs.readFile("./DataBase.json", "utf8", (err, jsonString) => {
   if (err) {
     console.log("Error reading file from disk:", err);
     return;
   }
   try {
-    const customer = JSON.parse(jsonString);
-    console.log("Customer address is:", customer.address); // => "Customer address is: Infinity Loop Drive"
+    const Tasks = JSON.parse(jsonString);
+    console.log("Tasks are:", Tasks); 
   } catch (err) {
     console.log("Error parsing JSON string:", err);
   }
@@ -205,12 +205,6 @@ function remove() {
 function removeNo(d) {
   Tasks.splice(d-1,1);
 }
-/**-
- * 
- * @returns {void}
- */
-function edit(i,new_value){
- 
-}
+
 // The following line starts the application
 startApp("Jana Sakr");
