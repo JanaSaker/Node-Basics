@@ -1,6 +1,20 @@
 
 const Tasks = ['[ ] HTML', '[ ] CSS', '[ ] ENGLISH', '[ ] JAVA'];
 
+const fs =require('fs');
+
+fs.readFile("./customer.json", "utf8", (err, jsonString) => {
+  if (err) {
+    console.log("Error reading file from disk:", err);
+    return;
+  }
+  try {
+    const customer = JSON.parse(jsonString);
+    console.log("Customer address is:", customer.address); // => "Customer address is: Infinity Loop Drive"
+  } catch (err) {
+    console.log("Error parsing JSON string:", err);
+  }
+});
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -106,6 +120,9 @@ function onDataReceived(text) {
     console.log('quit or exit - to quit the program');
     console.log('add [task] - to add a task');
     console.log('remove [number]- to remove a task');
+    console.log('edit [number] [task] - to edit the tasks');
+    console.log('check - to check the tasks in the list');
+    console.log('uncheck - to uncheck the tasks in the list');
   }
   else{
     unknownCommand(text);
@@ -140,6 +157,15 @@ function hello(text){
  * @returns {void}
  */
 function quit(){
+  const jsonString = JSON.stringify(Tasks)
+  fs.writeFileSync('./DataBase.json', jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('Successfully wrote file')
+    }
+})
+
   console.log('Quitting now, goodbye!')
   process.exit();
 }
