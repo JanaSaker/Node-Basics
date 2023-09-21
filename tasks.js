@@ -1,5 +1,5 @@
 
-const Tasks = ['HTML', 'CSS', 'ENGLISH', 'JAVA'];
+const Tasks = ['[ ] HTML', '[ ] CSS', '[ ] ENGLISH', '[ ] JAVA'];
 
 /**
  * Starts the application
@@ -37,11 +37,47 @@ function startApp(name){
  */
 function onDataReceived(text) {
   const r=text.split(' ')[0].trim();
+  const m=parseInt(text.split(' ')[1]);
   const t=text.slice(4, text.length);
+  const n=text.slice(5,text.length);
   const d=parseInt(text.slice(7,text.length))
+
+  const checkTask = text.slice(6,7);
+  const unCheckTask = text.slice(8,9);
+  const editText = text.split(' ');
+
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
+  else if(r == 'edit'){
+    if(n.trim() === ""){
+      console.log("You can not edit an empty")
+    }
+    else if(isNaN(editText[1])){
+      Tasks[Tasks.length-1] = "[ ] " + n.replace("\n","");
+    }
+    else if(parseInt(editText[1]) > Tasks.length)
+      console.log("There is no number " + editText[1])
+    else if (editText[1] !==NaN)
+      Tasks[parseInt(editText[1]-1)] = "[ ] " + text.slice(7,text.length).replace("\n","");
+  }
+  
+  
+  else if(r == 'check'){
+    if(text.slice(6,text.length).trim() === "")
+      console.log("What do you want to check?");
+    else if(Tasks[checkTask - 1].startsWith("[ ]"))
+    Tasks[checkTask - 1] = "[✓]" + Tasks[checkTask - 1].slice(3);
+  }
+
+  else if(r == 'uncheck'){
+    if(text.slice(8,text.length).trim() === ""){
+      console.log("What do u need to uncheck?");
+    }
+    else if (Tasks[unCheckTask - 1].startsWith("[✓]"))
+    Tasks[unCheckTask - 1] = "[ ]" + Tasks[unCheckTask - 1].slice(3);
+  }
+  
   else if(r === 'add'){
     if (t.trim() ===""){
       console.log('task is empty');
@@ -125,35 +161,30 @@ function quit(){
  * @returns {void}
  */
  function add(t) {
-     Tasks.push(t.replace('\n', ''));
+     Tasks.push('[ ] '+ t.replace('\n', ''));
   }
   /**
- * remove the tasks
+ * remove the first task
  *
  * @returns {void}
  */
- function remove() {
+function remove() {
   Tasks.pop();
 }
+/**
+ * remove the tasks
+ * 
+ * @returns {void}  
+ */
 function removeNo(d) {
   Tasks.splice(d-1,1);
 }
-//  /**
-//  * remove the tasks
-//  *
-//  * @returns {void}
-//  */
-// function remove1() { 
-//   Tasks.shift(); 
-// }
-//   /**
-//  * remove the tasks from the 
-//  * 
-//  * @returns {void}
-//  */
-// function remove2() { 
-//   Tasks.splice(1,1); 
-// }
+/**-
+ * 
+ * @returns {void}
+ */
+function edit(i,new_value){
  
+}
 // The following line starts the application
 startApp("Jana Sakr");
